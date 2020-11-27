@@ -1,0 +1,173 @@
+create table ZIPCODE (  
+  ZipCode number PRIMARY KEY NOT NULL,
+  Region varchar2(30),
+  Country varchar2(30) NOT NULL,
+  City varchar2(30) NOT NULL,
+  CreatedDate date NOT NULL,
+  ModifiedDate date NOT NULL
+ )  
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (45338,'','United Kingdom','London',DATE '2017-05-01', DATE '2017-08-31');
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (15489,'Europe','France','Nice',DATE '2014-07-25', DATE '2020-01-21');
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (77548,'Europe','Spain','Madrid',DATE '2010-04-22', DATE '2020-01-21');	
+
+Select * from ZIPCODE
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (11265,'Europe','Italy','Venice',DATE '2004-11-12', DATE '2020-01-21');			
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (84536,'Europe','Turkey','Istanbul',DATE '1999-02-25', DATE '2020-01-21');
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (79852,'Europe','Turkey','Izmir',DATE '2013-03-09', DATE '2020-01-21');				
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (16749,'America','USA','Ohio',DATE '2003-10-15', DATE '2020-01-21');			
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (25479,'','Netherlands','Amsterdam',DATE '2012-04-22', DATE '2020-01-21');			
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (15111,'','Spain','Barcelona',DATE '2018-12-25', DATE '2020-01-21');				
+
+INSERT INTO ZIPCODE
+(ZipCode, Region,Country, City,CreatedDate, ModifiedDate)
+VALUES (32485,'','Turkey','Istanbul',DATE '2017-07-07', DATE '2020-01-21');
+
+
+
+CREATE TABLE STUDENTS(
+
+StudentID Number(10,0) PRIMARY KEY NOT NULL,
+FirstName Varchar2(20) NOT NULL,
+MiddleName Varchar2(20),
+LastName Varchar2(20) NOT NULL,
+BirthDate Date NOT NULL,
+Department Varchar2(50) NOT NULL,
+Phone Varchar2(15) NOT NULL,
+Address Varchar2(100) NULL,
+ZipCode Number NOT NULL,
+RegistrationDate Date NOT NULL
+
+)
+
+ALTER TABLE STUDENTS ADD CONSTRAINT fk_students_zipcode
+FOREIGN KEY (ZipCode) REFERENCES ZIPCODE(Zipcode)
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (6030319910,'Sule','','Kaya',DATE '1996-07-30','Engineering',44938615155,'4455 Landing Lange, APT 4',45338,DATE '2010-01-21');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (5158734258,'Alihan','','Eser',DATE '1997-01-02','Engineering',86821045974,'Louisville, KY 1234',15489,DATE '2015-03-11');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (5585175696,'Yaren','Sare','Çetinkaya',DATE '1992-07-19','Business',57767807034,'90210 Broadway Blvd.',77548,DATE '2016-11-11');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (9540720804,'Deniz','','Akçit',DATE '1998-11-14','Law',11488670942,'Nashville, TN 37011-5678',11265,DATE '2020-03-18');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (4123857764,'Oguz','','Tandogan',DATE '1993-05-14','Medicine',60658555197,'132, My Street,',84536,DATE '2011-05-21');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (5541071961,'Enes','Sait','Aydogdu',DATE '1991-01-11','Humanities & Sciences',34640006570,'Kingston, New York 12401',79852,DATE '2020-07-08');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (233546212,'Elif','','Yılmaz',DATE '1989-01-21','Medicine',99662651371,'Mr John Smith Street',16749,DATE '2002-04-22');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (7783774528,'Aylin','Selin','Yılmaz',DATE '2000-01-21','Education',50399781706,'132, My Street,',25479,DATE '2020-01-21');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (9054495290,'Hande','','Cagcag',DATE '1996-03-27','Business',31570164426,'Bigtown BG23 4YZ',15111,DATE '2015-11-01');
+
+INSERT INTO STUDENTS
+(StudentID, FirstName,MiddleName, LastName,BirthDate, Department,Phone, Address,ZipCode,RegistrationDate)
+VALUES (1413792631,'Can','','Fırat',DATE '2002-01-01','Law',12144650541,'123 Main Street SW',32485,DATE '2020-09-01');
+
+
+CREATE TABLE COURSES(
+
+StudentID Number(10,0) NOT NULL,
+CourseID Number(10,0) PRIMARY KEY NOT NULL,
+CourseName Varchar2(50) NOT NULL,
+InstructorName Varchar2(30) NOT NULL,
+InstructorID Number NOT NULL,
+SectionID Number NOT NULL,
+EnrollDate Date NOT NULL,
+FinalGrade Varchar(5) NOT NULL
+
+)
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (6030319910,532,'Arts&Humanities',DATE '2020-03-21','A','Jake',25349,2);	
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (5158734258,242,'Business&Management',DATE '2020-01-10','A+','Sally',90910,8);	
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (5585175696,454,'Life Sciences&Medicine',DATE '2020-01-10','B-','Elis',88023,4);
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (9540720804,296,'Natural Sciences',DATE '2020-01-10','C+','Andrew',44714,9);		
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (4123857764,862,'Social Sciences',DATE '2019-09-20','D','Vladlena',71240,6);		
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (5541071961,755,'Technology',DATE '2019-10-10','F','Robert',78074,7);		
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (233546212,294,'Project Management',DATE '2020-01-20','C-','John',1601,5);	
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (7783774528,517,'Music',DATE '2019-03-02','A','Kay',1467,8);	
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (9054495290,272,'Natural Sciences',DATE '2020-09-15','B+','Tim',37656,4);	
+
+INSERT INTO COURSES
+(StudentID, CourseID,CourseName, EnrollDate, FinalGrade,InstructorName,InstructorID,SectionID)
+VALUES (1413792631,632,'Social Sciences',DATE '2015-07-11','A-','Brian',77036,7);	
+
+
+CREATE PUBLIC SYNONYM std for STUDENTS;
+SELECT * FROM std;
+
+CREATE VIEW course_grade AS
+SELECT StudentID,CoursenName,FinalGrade
+FROM COURSES
+WHERE CourseName LIKE '%an%';

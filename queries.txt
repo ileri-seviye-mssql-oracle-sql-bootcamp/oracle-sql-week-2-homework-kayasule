@@ -1,0 +1,242 @@
+-- Kotası limitsiz olan ürünler hangileridir? ----Telco şeması için
+
+SELECT PRODUCT_NAME
+FROM TELCO.PRODUCT
+WHERE QUOTA='LIMITLESS';
+
+-- Statüsü 'Initial' olan müşterileri bulunuz. ----Telco şeması için
+
+SELECT STATUS
+FROM TELCO.CUSTOMERS
+WHERE STATUS='Initial';
+
+-- Şehir bilgisi 'ISTANBUL' olan adresleri bulunuz. ----Telco şeması için
+
+SELECT FULL_ADDRESS,CITY
+FROM TELCO.ADDRESS
+WHERE CITY ='ISTANBUL';
+
+-- Birim fiyatı 150'den büyük olan order_itemları bulunuz. ----Sales şeması için
+
+SELECT ORDER_ID,ITEM_ID
+FROM SALES.ORDER_ITEMS
+WHERE UNIT_PRICE > 150;
+
+-- İşe alım tarihi Mayıs 2016 olan çalışanları bulunuz. ----Sales şeması için
+
+SELECT EMPLOYEE_ID,FIRST_NAME,LAST_NAME
+FROM SALES.EMPLOYEES
+WHERE HIRE_DATE MONTHS BETWEEN(TO_DATE('2016/05/01','2016/05/31'));
+
+
+-- Adı Charlie ya da Charlsie olan contactları bulunuz. ----Sales şeması için
+
+SELECT FIRST_NAME
+FROM SALES.CONTACTS
+WHERE FIRST_NAME='Charlie' OR FIRST_NAME='Charlsie';
+
+--Yılın 4. aylarında en çok hangi amaçla kredi çekilmi?tir? ----Banking şeması için
+
+-- Adet sayısı 10dan büyük 50den küçük envanterleri bulunuz. ----Sales şeması için
+
+SELECT PRODUCT_ID 
+FROM SALES.INVENTORIES
+WHERE QUANTITY>10 AND QUANTITY<50;
+
+-- Birincil iletişim bilgisi olmayan telefon numaralarını bulunuz. ----Telco şeması için
+
+SELECT CNT_VALUE
+FROM TELCO.CONTACT
+WHERE IS_PRIMARY IS NULL 
+AND CNT_TYPE='PHONE';
+
+-- Bir siparişte toplam 100.0000'den fazla ücret ödeyen emirler nedir? ----Sales şeması için
+
+SELECT ORDER_ID
+FROM SALES.ORDER_ITEMS
+WHERE QUANTITY*UNIT_PRICE>100000;
+
+-- Bankanın 50 ve ya 51 yaşında kadın müşterilerinden aynı isme sahip olan müşterisi/müşterileri var mı? Varsa isimleri neler?----Banking şeması için
+
+-- Hesap ödeme şekli nakit olmayan hesaplar hangileridir? ----Telco şeması için
+
+SELECT ACCOUNT_NAME,ID
+FROM TELCO.ACCOUNT
+WHERE PAYMENT_TYPE != 'CASH';
+
+-- Statüsü deaktif olan müşterilerin bağlantı kesim tarihleri nedir? ----Telco şeması için
+
+SELECT DISCONNECTION_DATE,CUSTOMER_NUM
+FROM TELCO.CUSTOMER
+WHERE STATUS='DEACTIVE';
+
+-- Manager'ı olmayan çalışanlar hangileridir? ----Sales şeması için
+
+SELECT EMPLOYEE_ID
+FROM SALES.EMPLOYEES
+WHERE MANAGER_ID IS NULL;
+
+-- State bilgisi boş olan lokasyonları bulunuz.----Sales şeması için
+
+SELECT LOCATION_ID
+FROM SALES.LOCATIONS
+WHERE STATE IS NULL;
+
+-- Hesap kapanış tarihi dolu olan hesapları bulunuz. ----Telco şeması için
+
+SELECT ACCOUNT_NAME
+FROM TELCO.ACCOUNT
+WHERE ACCOUNT_CLOSING_DATE IS NOT NULL;
+
+-- Elektronik fatura mail adresi (E_bill_email) olan hesaplar hangileridir? ----Telco şeması için
+
+SELECT ACCOUNT_NAME,ID
+FROM TELCO.ACCOUNT
+WHERE E_BILL_EMAIL IS NOT NULL;
+
+-- Durumu iptal olan ve satıcıları olmayan emirler hangileridir? ----Sales şeması için
+
+SELECT ORDER_ID
+FROM SALES.ORDERS
+WHERE STATUS='Canceled'
+AND SALESMAN_ID IS NULL;
+
+-- Sözleşme bitiş tarihi 1 Ocak 2000'den büyük , 1 Ocak 2005'ten küçük olan sözleşmeleri bulunuz. ----Telco şeması için
+
+-- Ocak 2016 ile Haziran 2016 arasında verilen siparişler hangileridir? ----Sales şeması için
+
+-- 2005 yılından önce yapılan ve hala aktif olan subscriptionlar hangileridir? ----Telco şeması için
+
+SELECT ID
+FROM TELCO.SUBSCRIPTION
+WHERE STATUS='ACTIVE' AND ACTIVATION_DATE< '01.01.2005';
+
+-- Sözleşme başlangıç tarihi Ocak 2010'dan büyük olan sözleşmeleri bulunuz. ----Telco şeması için
+
+/*
+SELECT AG_NUM,ID
+FROM TELCO.AGREEMENT
+WHERE CREATE_DATE
+*/
+
+-- İsmi E ile başlayan müşterileri bulunuz. ----Telco şeması için
+
+SELECT NAME
+FROM TELCO.CUSTOMER
+WHERE NAME LIKE 'E%';
+
+-- Product tipi 'DSL' ile biten ürünleri bulunuz. ----Telco şeması için
+
+SELECT PRODUCT_NAME,ID
+FROM TELCO.PRODUCT
+WHERE PRODUCT_TYPE LIKE '%DSL';
+
+-- Unvanı 'S' ile başlamayan çalışanları bulunuz. ----Sales şeması için
+
+SELECT EMPLOYEE_ID,FIRST_NAME,LAST_NAME
+FROM SALES.EMPLOYEES
+WHERE JOB_TITLE NOT LIKE 'S%';
+
+-- Herhangi bir çeşit Intel Xeon ürünler hangileridir? ----Sales şeması için
+
+SELECT CATEGORY_ID, PRODUCT_ID
+FROM SALES.PRODUCTS
+WHERE PRODUCT_NAME LIKE '%Intel Xeon%';
+
+-- İsminde ya da soyisminde 'ü' harfi geçen müşteriler hangileridir? ----Telco şeması için
+
+SELECT CUSTOMER_NUM,NAME,SURNAME
+FROM TELCO.CUSTOMER
+WHERE NAME LIKE '%ü%' OR SURNAME LIKE '%ü%';
+
+-- İsmi 'C' ile başlayan kontaklar hangileridir? Soyadına göre alfabetik sıra ile sıralayalım. ----Sales şeması için
+
+SELECT CONTACT_ID,FIRST_NAME,LAST_NAME
+FROM SALES.PRODUCTS
+WHERE FIRST_NAME LIKE 'C%'
+ORDER BY LAST_NAME ASC;
+
+-- Ürün adı 'Asus' ile başlayan ve liste fiyatı standart ücretinden küçük olan ürünleri bulunuz. ----Sales şeması için
+
+SELECT PRODUCT_ID,PRODUCT_NAME
+FROM SALES.PRODUCTS
+WHERE PRODUCT_NAME LIKE 'Asus%'
+AND LIST PRICE<STANDARD_COST;
+
+-- Ülke kodu UK ve AU olan adresleri bulunuz.----Telco şeması için
+
+SELECT FULL_ADDRESS
+FROM TELCO.ADDRESS
+WHERE COUNTRY_CD='UK' AND COUNTRY_CD='AU';
+
+-- 1,2,4,5 id'li kategorilerin bilgilerini bulunuz. ----Sales şeması için
+
+SELECT CATEGORY_ID,CATEGORY_NAME
+FROM SALES.PRODUCT_CATEGORIES
+WHERE   CATEGORY_ID>=1 AND
+        CATEGORY_ID<=5 AND
+        CATEGORY_ID!=3;
+        
+-- Taahhüt süresi 240 ve 120 ay olan bütün sözleşmeleri bulmak istiyoruz.----Telco şeması için
+
+SELECT ID,AG_NUM
+FROM TELCO.AGREEMENT
+WHERE COMMITMENT_DURATION=120
+AND COMMITMENT_DURATION=240;
+
+-- Sipariş durumu 'Shipped'den farklı olan müşterilerin bilgilerini bulunuz. ----Sales şeması için
+
+SELECT CUSTOMER_ID
+FROM SALES.ORDERS
+WHERE STATUS NOT LIKE 'Shipped';
+
+-- Adet sayısı 100e eşit olan envanterlerin product bilgisini bulunuz. ----Sales şeması için
+
+SELECT PRODUCT_ID
+FROM SALES.INVENTORIES
+WHERE QUANTITY=100;
+
+-- Sözleşme alt tipi MAIN olan kaç tane sözleşme vardır?----Telco şeması için
+
+SELECT COUNT(AG_NUM) AS total_subtype_main
+FROM TELCO.AGREEMENT
+WHERE SUBTYPE ='MAIN';
+
+-- Deaktif müşterilerin sayısını bulunuz.----Telco şeması için
+
+SELECT COUNT(CUSTOMER_NUM) AS total_deactive_customer
+FROM TELCO.CUSTOMER
+WHERE STATUS='DEACTIVE';
+
+-- Beijing (8 numaralı warehouse)'da kaç farklı envanter vardır? ----Sales şeması için
+
+SELECT COUNT(DISTINCT PRODUCT_ID) AS inventory
+FROM SALES.INVENTORIES
+WHERE WAREHOUSE_ID=8;
+
+-- İletişim tipi olarak email ve statusu kullanımda olan kaç müşteri var?----Telco şeması için
+
+SELECT COUNT(CUSTOMER_NUM) AS total_email_active_customer
+FROM TELCO.CUSTOMER
+WHERE STATUS='ACTIVE'
+AND C_TYPE='email';
+
+-- Liste fiyati 1000 ile 3000 arasinda olan kaç product var?----Sales şeması için
+
+SELECT COUNT(PRODUCT_ID) AS total_product
+FROM SALES.PRODUCTS
+WHERE LIST_PRICE BETWEEN 1000 AND 3000;
+
+--Hangi yıllarda kaç hesap açılmıştır?----Banking şeması için
+
+SELECT COUNT(YEAR) AS year_account
+FROM BANKING.TRANSACTIONS
+ORDER BY AMOUNT DESC;
+
+-- İşlemlerin tiplerine göre toplam sayılarının büyükten küçüğe sıralaması nedir?----Banking şeması için
+
+SELECT AMOUNT,TYPE
+FROM BANKING.TRANSACTIONS
+ORDER BY AMOUNT DESC;
+
+-- İşlemlerin tiplerine göre toplam tutarlarının büyükten küçüğe sıralaması nedir?----Banking şeması için
